@@ -30,6 +30,7 @@ const listings = [
     description:
       "An elegant apartment in the heart of Clifton, this 2-bedroom residence offers breathtaking views, modern interiors, and easy access to cafes, shops, and entertainment. Perfect for professionals or small families.",
   },
+  
   {
     id: "3",
     title: "Cozy Studio Near Market",

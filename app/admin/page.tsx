@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Lock, User } from "lucide-react";
+import { loginUser } from "../../libs/api";
+import toast from "react-hot-toast";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -10,13 +12,15 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    const res = await loginUser(email, password);
 
-    if (email === "admin@example.com" && password === "admin123") {
-      router.push("/admin/dashboard");
+    if (res.success) {
+      toast.success("Logged in successfully");
+      router.push("/adminProperty");
     } else {
-      alert("Invalid credentials");
+      toast.error(res.message || "Invalid credentials ❌");
     }
   };
 
@@ -91,10 +95,7 @@ export default function AdminLogin() {
         <div className="text-center mt-6">
           <p className="text-sm text-gray-600">
             Forgot password?{" "}
-            <a
-              href="#"
-              className="text-indigo-600 hover:underline font-medium"
-            >
+            <a href="#" className="text-indigo-600 hover:underline font-medium">
               Reset here
             </a>
           </p>

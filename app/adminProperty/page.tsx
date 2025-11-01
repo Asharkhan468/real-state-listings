@@ -30,6 +30,8 @@ const sampleProperties: Property[] = [
     image: "/images/house3.jpg",
     badge: "Featured",
   },
+
+  
   {
     id: 2,
     title: "Modern Apartment",
