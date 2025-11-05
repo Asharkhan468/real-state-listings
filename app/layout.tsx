@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 const outfit = Outfit({
-  variable:"--font-outfit",
+  variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], 
+  weight: ["400", "500", "600", "700"],
 });
 
 const geistSans = Geist({
@@ -31,10 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${outfit.variable}  antialiased font-outfit`}
-      >
+      <body className={`${outfit.variable}  antialiased font-outfit`}>
         {children}
+        <Toaster position="top-right" reverseOrder={false} />
       </body>
     </html>
   );
