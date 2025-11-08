@@ -24,7 +24,7 @@ export default function AdminProperties() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [openMenu, setOpenMenu] = useState<number | null>(null);
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingdata, setLoadingdata] = useState(true);
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -57,18 +57,17 @@ export default function AdminProperties() {
       } else {
         setError(result.message);
       }
-      setLoading(false);
+      setLoadingdata(false);
     };
 
     fetchPosts();
   }, []);
 
-  const editModal = (item:any)=>{
-    console.log(item)
-    localStorage.setItem("editedData" , JSON.stringify(item));
-    router.push('/addProperty');
-
-  }
+  const editModal = (item: any) => {
+    console.log(item);
+    localStorage.setItem("editedData", JSON.stringify(item));
+    router.push("/addProperty");
+  };
 
 
   return (
@@ -179,7 +178,7 @@ export default function AdminProperties() {
                 Cancel
               </button>
               <button
-                onClick={()=>handleDelete(selectedId)}
+                onClick={() => handleDelete(selectedId)}
                 className="px-5 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-medium transition-all"
               >
                 Delete

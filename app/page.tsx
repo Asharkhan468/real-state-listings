@@ -249,134 +249,87 @@ export default function HomePage() {
               </div>
 
               <div className="p-5 sm:p-6">
-                {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {filtered.map((item: any) => (
-                    <article
-                      key={item._id}
-                      className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300"
-                    >
-                      <div className="relative h-52 w-full">
-                        <Image
-                          src={item.image}
-                          alt={item.title}
-                          fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        {item.badge && (
-                          <span className="absolute top-3 left-3 bg-gradient-to-r from-indigo-600 to-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-                            {item.badge}
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="p-4 sm:p-5">
-                        <h4 className="font-semibold text-base sm:text-lg text-gray-900 truncate">
-                          {item.title}
-                        </h4>
-                        <p className="text-sm text-gray-500 mt-1">
-                          {item.location}
-                        </p>
-
-                        <div className="mt-3 flex items-center justify-between">
-                          <span className="text-indigo-600 font-bold text-base sm:text-lg">
-                            {currency(item.price)}
-                          </span>
-                          <span className="text-xs sm:text-sm text-gray-600">
-                            {item.beds}bd · {item.baths}ba · {item.area} sqft
-                          </span>
-                        </div>
-
-                        <div className="mt-4 flex gap-3">
-                          <button
-                            onClick={() => router.push(`/property/${item._id}`)}
-                            className="flex-1 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-md font-medium hover:opacity-90 transition"
-                          >
-                            View
-                          </button>
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                </div> */}
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 min-h-[200px] items-center justify-center">
-  {loading ? (
-    // Loading Spinner
-    <div className="col-span-full flex justify-center items-center py-10">
-      <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-      <span className="ml-3 text-indigo-600 font-medium">Loading properties...</span>
-    </div>
-  ) : error ? (
-    // Error Message
-    <div className="col-span-full text-center py-10 text-red-500 font-medium">
-      {error}
-    </div>
-  ) : filtered.length === 0 ? (
-    // No Property Found Message
-    <div className="col-span-full text-center py-12">
-      <Image
-        src="https://cdn-icons-png.flaticon.com/512/7486/7486754.png"
-        alt="No results"
-        width={120}
-        height={120}
-        className="mx-auto opacity-80"
-      />
-      <h3 className="mt-4 text-gray-700 font-semibold text-lg">
-        No properties found
-      </h3>
-      <p className="text-sm text-gray-500 mt-1">
-        Try adjusting your filters or search query.
-      </p>
-    </div>
-  ) : (
-    filtered.map((item: any) => (
-      <article
-        key={item._id}
-        className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300"
-      >
-        <div className="relative h-52 w-full">
-          <Image
-            src={item.image}
-            alt={item.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          {item.badge && (
-            <span className="absolute top-3 left-3 bg-gradient-to-r from-indigo-600 to-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-              {item.badge}
-            </span>
-          )}
-        </div>
+                  {loading ? (
+                    // Loading Spinner
+                    <div className="col-span-full flex justify-center items-center py-10">
+                      <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                      <span className="ml-3 text-indigo-600 font-medium">
+                        Loading properties...
+                      </span>
+                    </div>
+                  ) : error ? (
+                    <div className="col-span-full text-center py-10 text-red-500 font-medium">
+                      {error}
+                    </div>
+                  ) : filtered.length === 0 ? (
+                    <div className="col-span-full text-center py-12">
+                      <Image
+                        src="https://cdn-icons-png.flaticon.com/512/7486/7486754.png"
+                        alt="No results"
+                        width={120}
+                        height={120}
+                        className="mx-auto opacity-80"
+                      />
+                      <h3 className="mt-4 text-gray-700 font-semibold text-lg">
+                        No properties found
+                      </h3>
+                      <p className="text-sm text-gray-500 mt-1">
+                        Try adjusting your filters or search query.
+                      </p>
+                    </div>
+                  ) : (
+                    filtered.map((item: any) => (
+                      <article
+                        key={item._id}
+                        className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300"
+                      >
+                        <div className="relative h-52 w-full">
+                          <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          {item.badge && (
+                            <span className="absolute top-3 left-3 bg-gradient-to-r from-indigo-600 to-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                              {item.badge}
+                            </span>
+                          )}
+                        </div>
 
-        <div className="p-4 sm:p-5">
-          <h4 className="font-semibold text-base sm:text-lg text-gray-900 truncate">
-            {item.title}
-          </h4>
-          <p className="text-sm text-gray-500 mt-1">{item.location}</p>
+                        <div className="p-4 sm:p-5">
+                          <h4 className="font-semibold text-base sm:text-lg text-gray-900 truncate">
+                            {item.title}
+                          </h4>
+                          <p className="text-sm text-gray-500 mt-1">
+                            {item.location}
+                          </p>
 
-          <div className="mt-3 flex items-center justify-between">
-            <span className="text-indigo-600 font-bold text-base sm:text-lg">
-              {currency(item.price)}
-            </span>
-            <span className="text-xs sm:text-sm text-gray-600">
-              {item.beds}bd · {item.baths}ba · {item.area} sqft
-            </span>
-          </div>
+                          <div className="mt-3 flex items-center justify-between">
+                            <span className="text-indigo-600 font-bold text-base sm:text-lg">
+                              {currency(item.price)}
+                            </span>
+                            <span className="text-xs sm:text-sm text-gray-600">
+                              {item.beds}bd · {item.baths}ba · {item.area} sqft
+                            </span>
+                          </div>
 
-          <div className="mt-4 flex gap-3">
-            <button
-              onClick={() => router.push(`/property/${item._id}`)}
-              className="flex-1 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-md font-medium hover:opacity-90 transition"
-            >
-              View
-            </button>
-          </div>
-        </div>
-      </article>
-    ))
-  )}
-</div>
-
+                          <div className="mt-4 flex gap-3">
+                            <button
+                              onClick={() =>
+                                router.push(`/property/${item._id}`)
+                              }
+                              className="flex-1 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-md font-medium hover:opacity-90 transition"
+                            >
+                              View
+                            </button>
+                          </div>
+                        </div>
+                      </article>
+                    ))
+                  )}
+                </div>
               </div>
             </div>
 
