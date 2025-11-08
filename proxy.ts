@@ -1,36 +1,12 @@
-// import { NextResponse } from "next/server";
-// import type { NextRequest } from "next/server";
-
-// export function proxy(request: NextRequest) {
-//   const token = request.cookies.get("token")?.value;
-//   const { pathname } = request.nextUrl;
-
-//   const protectedRoutes = ["/adminProperty", "/addProperty"];
-
-//   if (protectedRoutes.some((path) => pathname.startsWith(path)) && !token) {
-//     return NextResponse.redirect(new URL("/admin", request.url));
-//   }
-
-//   if (pathname === "/admin" && token) {
-//     return NextResponse.redirect(new URL("/", request.url));
-//   }
-
-//   return NextResponse.next();
-// }
-
-// export const config = {
-//   matcher: ["/admin", "/adminProperty/:path*", "/addProperty/:path*"],
-// };
-
-
-
 import { NextResponse } from "next/server";
 
-export async function proxy(request:any) {
+export async function proxy(request: any) {
   const { pathname } = request.nextUrl;
 
   const protectedRoutes = ["/adminProperty", "/addProperty"];
   const token = request.cookies.get("token")?.value;
+
+  console.log("token ==>", token);
 
   // ✅ if route is protected
   if (protectedRoutes.some((path) => pathname.startsWith(path))) {
@@ -40,10 +16,13 @@ export async function proxy(request:any) {
 
     // ✅ verify token with backend
     try {
-      const res = await fetch("https://real-state-listing-backend.vercel.app/api/v1/verifyToken", {
-        headers: { Cookie: `token=${token}` }, 
-        credentials: "include",
-      });
+      const res = await fetch(
+        "https://real-state-listing-backend.vercel.app/api/v1/verifyToken",
+        {
+          headers: { Cookie: `token=${token}` },
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
       if (!res.ok || !data.valid) {
