@@ -1,22 +1,18 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 
-export async function middleware(req: NextRequest) {
+export function middleware(req:any) {
   const token = req.cookies.get("token")?.value;
-  const { pathname } = req.nextUrl;
 
-  console.log("TOKEN =>", token);
+  console.log("Middleware token =>", token);
 
-  // PROTECTED ROUTES
-  const protectedRoutes = ["/addProperty", "/adminProperty"];
-
-  // Agar user protected route pe jara hai aur token NAHI mila
-  if (protectedRoutes.some((p) => pathname.startsWith(p))) {
-    if (!token) {
-      const loginUrl = new URL("/admin", req.url);
-      return NextResponse.redirect(loginUrl);
-    }
+  // No token → redirect
+  if (!token) {
+    return NextResponse.redirect(new URL("/admin", req.url));
   }
 
   return NextResponse.next();
 }
+
+export const config = {
+  matcher: ["/addProperty", "/adminProperty"],
+};
