@@ -1,5 +1,6 @@
 "use client";
 
+import ProtectedRoute from "@/components/ProtectedRoute";
 import { createPost, updatePost } from "@/libs/api";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
@@ -126,6 +127,7 @@ export default function AddProperty() {
   };
 
   return (
+    <ProtectedRoute>
     <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-white to-blue-100 flex items-center justify-center p-6">
       <div className="w-full max-w-4xl bg-white/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/30 p-10 transition-all duration-300 hover:shadow-indigo-200">
         <h1 className="text-4xl font-extrabold text-center text-indigo-700 mb-10 tracking-tight">
@@ -311,5 +313,6 @@ export default function AddProperty() {
         </form>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
