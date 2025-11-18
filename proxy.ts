@@ -1,10 +1,5 @@
 import { NextResponse } from "next/server";
 
-const protectedRoutes = [
-  "/addProperty",
-  "/adminProperty"
-];
-
 export default function proxy(request: any) {
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
@@ -13,7 +8,7 @@ export default function proxy(request: any) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (!token && protectedRoutes.includes(pathname)) {
+  if (!token && (pathname === "/addProperty" || pathname === "/adminProperty")) {
     return NextResponse.redirect(new URL("/admin", request.url));
   }
 
@@ -21,5 +16,5 @@ export default function proxy(request: any) {
 }
 
 export const config = {
-  matcher: protectedRoutes,
+  matcher: ["/addProperty", "/adminProperty"], 
 };
