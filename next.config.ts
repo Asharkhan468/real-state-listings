@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
 
   },
   experimental: {
-    middlewarePrefetch: "flexible",
+    proxyPrefetch: "flexible",
   },
 
 };

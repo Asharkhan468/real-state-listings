@@ -5,7 +5,7 @@ const protectedRoutes = [
   "/adminProperty"
 ];
 
-export default function middleware(request: any) {
+export default function proxy(request: any) {
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
 
