@@ -6,7 +6,6 @@ import { MoreVertical, Edit, Trash2, X, Plus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { deletePost, getAllPosts } from "@/libs/api";
-import ProtectedRoute from "@/components/ProtectedRoute";
 
 type Property = {
   id: number;
@@ -72,7 +71,7 @@ export default function AdminProperties() {
 
 
   return (
-    <ProtectedRoute>
+    
     <main className="min-h-screen bg-gray-50 py-10 px-5 relative">
       <Toaster position="top-right" />
       <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
@@ -191,6 +190,6 @@ export default function AdminProperties() {
       )}
     </main>
 
-    </ProtectedRoute>
+   
   );
 }
