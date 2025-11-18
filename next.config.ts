@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
     ],
 
   },
+  experimental: {
+    middlewarePrefetch: "flexible",
+  },
 
 };
 
