@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Protected routes
-  if (pathname.startsWith('/admin/dashboard') || pathname.startsWith('/admin/protected')) {
+  if (pathname.startsWith('/addProperty') || pathname.startsWith('/adminProperty')) {
     if (!token) {
       return NextResponse.redirect(new URL('/admin', request.url));
     }
@@ -16,5 +16,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/dashboard/:path*', '/admin/protected/:path*']
+  matcher: ['/addProperty/:path*', '/adminProperty/:path*']
 };
