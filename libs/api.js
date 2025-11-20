@@ -17,7 +17,7 @@ export const loginUser = async (email, password) => {
 
     if (data?.user) {
       localStorage.setItem("user", JSON.stringify(data.user));
-      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("token", data.token);
 
 
     }
