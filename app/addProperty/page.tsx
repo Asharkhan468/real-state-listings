@@ -3,8 +3,29 @@ import { createPost, updatePost } from "@/libs/api";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { ArrowLeft } from "lucide-react";
+
 
 export default function AddProperty() {
+
+  useEffect(() => {
+  // Trick: history me custom state push krdo
+  history.pushState(null, "", location.href);
+
+  const handleBackButton = () => {
+    // Browser ka BACK button yahan detect hota hai
+    localStorage.removeItem("editedData");
+    router.back()
+  };
+
+  window.addEventListener("popstate", handleBackButton);
+
+  return () => {
+    window.removeEventListener("popstate", handleBackButton);
+  };
+}, []);
+
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -41,6 +62,8 @@ export default function AddProperty() {
       }
     }
   }, []);
+
+
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -126,6 +149,18 @@ export default function AddProperty() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-white to-blue-100 flex items-center justify-center p-6">
+      <button
+  onClick={() => {
+    router.back()
+    localStorage.removeItem("editedData")
+  }}
+  className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 bg-white/40 backdrop-blur-md border border-white/30 
+             rounded-xl shadow-md hover:bg-white/60 transition-all hover:scale-105"
+>
+  <ArrowLeft size={20} className="text-indigo-700" />
+  <span className="font-semibold text-indigo-700">Back</span>
+</button>
+
       <div className="w-full max-w-4xl bg-white/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/30 p-10 transition-all duration-300 hover:shadow-indigo-200">
         <h1 className="text-4xl font-extrabold text-center text-indigo-700 mb-10 tracking-tight">
           {isEditMode
