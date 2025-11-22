@@ -6,6 +6,8 @@ import { MoreVertical, Edit, Trash2, X, Plus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { deletePost, getAllPosts } from "@/libs/api";
+import { ArrowLeft } from "lucide-react";
+
 
 type Property = {
   id: number;
@@ -64,7 +66,19 @@ export default function AdminProperties() {
 
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-5 relative">
+<button
+  onClick={() => router.push("/")}
+  className="flex items-center gap-2 px-4 py-2 bg-white text-indigo-600 rounded-full shadow-md 
+             hover:bg-indigo-50 transition-all fixed top-5 left-5 z-50 border border-indigo-200"
+>
+  <ArrowLeft size={18} />
+  <span className="font-medium hidden sm:block">Back to Home</span>
+</button>
+
+      
       <Toaster position="top-right" />
+
+      
       <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
         Admin Property Dashboard
       </h1>
