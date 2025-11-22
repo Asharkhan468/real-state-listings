@@ -42,13 +42,6 @@ export default function AdminProperties() {
     }
   };
 
-  const currency = (value: number) =>
-    value.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 0,
-    });
-
   useEffect(() => {
     const fetchPosts = async () => {
       const result = await getAllPosts();
@@ -79,69 +72,6 @@ export default function AdminProperties() {
       <div className="p-5 sm:p-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {posts.map((item: any) => (
-            // <article
-            //   key={item._id}
-            //   className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 relative"
-            // >
-            //   <div className="relative h-52 w-full">
-            //     <Image
-            //       src={item.image}
-            //       alt={item.title}
-            //       fill
-            //       className="object-cover transition-transform duration-500 group-hover:scale-105"
-            //     />
-            //     {item.badge && (
-            //       <span className="absolute top-3 left-3 bg-gradient-to-r from-indigo-600 to-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-            //         {item.badge}
-            //       </span>
-            //     )}
-            //     <button
-            //       className="absolute top-3 right-3 bg-white/80 hover:bg-white p-1.5 rounded-full transition"
-            //       onClick={() =>
-            //         setOpenMenu(openMenu === item._id ? null : item._id)
-            //       }
-            //     >
-            //       <MoreVertical size={18} className="text-gray-700" />
-            //     </button>
-
-            //     {openMenu === item._id && (
-            //       <div className="absolute top-10 right-3 bg-white border border-gray-100 rounded-lg shadow-md p-2 w-28 space-y-2 animate-fadeIn z-10">
-            //         <button
-            //           onClick={() => editModal(item)}
-            //           className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 transition"
-            //         >
-            //           <Edit size={14} /> Edit
-            //         </button>
-            //         <button
-            //           onClick={() => {
-            //             setSelectedId(item._id);
-            //             setShowModal(true);
-            //           }}
-            //           className="flex items-center gap-2 text-sm text-red-600 hover:text-red-800 transition"
-            //         >
-            //           <Trash2 size={14} /> Delete
-            //         </button>
-            //       </div>
-            //     )}
-            //   </div>
-
-            //   <div className="p-4 sm:p-5">
-            //     <h4 className="font-semibold text-base sm:text-lg text-gray-900 truncate">
-            //       {item.title}
-            //     </h4>
-            //     <p className="text-sm text-gray-500 mt-1">{item.location}</p>
-
-            //     <div className="mt-3 flex items-center justify-between">
-            //       <span className="text-indigo-600 font-bold text-base sm:text-lg">
-            //         {currency(item.price)}
-            //       </span>
-            //       <span className="text-xs sm:text-sm text-gray-600">
-            //         {item.beds}bd · {item.baths}ba · {item.area} sqft
-            //       </span>
-            //     </div>
-            //   </div>
-            // </article>
-
             <article
               key={item._id}
               className="group bg-white/90 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 relative"
@@ -199,7 +129,7 @@ export default function AdminProperties() {
 
                 <div className="mt-4 flex items-center justify-between">
                   <span className="text-indigo-600 font-bold text-lg">
-                    {currency(item.price)}
+                    {`Rs ${item.price}`}
                   </span>
                   <span className="text-xs sm:text-sm text-gray-600">
                     {item.beds}bd • {item.baths}ba • {item.area} sqft

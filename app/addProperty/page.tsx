@@ -5,26 +5,23 @@ import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
 
-
 export default function AddProperty() {
-
   useEffect(() => {
-  // Trick: history me custom state push krdo
-  history.pushState(null, "", location.href);
+    // Trick: history me custom state push krdo
+    history.pushState(null, "", location.href);
 
-  const handleBackButton = () => {
-    // Browser ka BACK button yahan detect hota hai
-    localStorage.removeItem("editedData");
-    router.back()
-  };
+    const handleBackButton = () => {
+      // Browser ka BACK button yahan detect hota hai
+      localStorage.removeItem("editedData");
+      router.back();
+    };
 
-  window.addEventListener("popstate", handleBackButton);
+    window.addEventListener("popstate", handleBackButton);
 
-  return () => {
-    window.removeEventListener("popstate", handleBackButton);
-  };
-}, []);
-
+    return () => {
+      window.removeEventListener("popstate", handleBackButton);
+    };
+  }, []);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -58,12 +55,10 @@ export default function AddProperty() {
       });
 
       if (parsed.image) {
-        setPreview(parsed.image); // if you store image url
+        setPreview(parsed.image);
       }
     }
   }, []);
-
-
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -82,7 +77,7 @@ export default function AddProperty() {
     }
   };
 
-   const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
     const data = localStorage.getItem("editedData");
@@ -92,7 +87,7 @@ export default function AddProperty() {
   }, []);
 
   // 🔹 Form Submit
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -100,9 +95,8 @@ export default function AddProperty() {
     let result;
 
     if (editedData) {
-      // 🔹 Edit Mode
       const parsed = JSON.parse(editedData);
-      const id = parsed._id; // assuming backend me document ID hai
+      const id = parsed._id;
 
       result = await updatePost(
         id,
@@ -125,7 +119,6 @@ export default function AddProperty() {
         toast.error(result.message);
       }
     } else {
-      // 🔹 Create Mode
       result = await createPost(
         formData.title,
         formData.price,
@@ -150,22 +143,20 @@ export default function AddProperty() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-white to-blue-100 flex items-center justify-center p-6">
       <button
-  onClick={() => {
-    router.back()
-    localStorage.removeItem("editedData")
-  }}
-  className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 bg-white/40 backdrop-blur-md border border-white/30 
+        onClick={() => {
+          router.back();
+          localStorage.removeItem("editedData");
+        }}
+        className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 bg-white/40 backdrop-blur-md border border-white/30 
              rounded-xl shadow-md hover:bg-white/60 transition-all hover:scale-105"
->
-  <ArrowLeft size={20} className="text-indigo-700" />
-  <span className="font-semibold text-indigo-700">Back</span>
-</button>
+      >
+        <ArrowLeft size={20} className="text-indigo-700" />
+        <span className="font-semibold text-indigo-700">Back</span>
+      </button>
 
       <div className="w-full max-w-4xl bg-white/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/30 p-10 transition-all duration-300 hover:shadow-indigo-200">
         <h1 className="text-4xl font-extrabold text-center text-indigo-700 mb-10 tracking-tight">
-          {isEditMode
-            ? "Edit Property"
-            : "Add Property"}
+          {isEditMode ? "Edit Property" : "Add Property"}
         </h1>
 
         <form
@@ -335,9 +326,7 @@ export default function AddProperty() {
               className="relative inline-flex items-center justify-center px-12 py-3 font-semibold text-white bg-gradient-to-r from-indigo-600 to-blue-500 rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
               <span className="relative z-10">
-                {isEditMode
-                  ? "Update Property"
-                  : "Add Property"}
+                {isEditMode ? "Update Property" : "Add Property"}
               </span>
               <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-500 to-blue-400 blur-md opacity-40"></span>
             </button>
